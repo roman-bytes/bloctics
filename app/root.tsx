@@ -9,11 +9,16 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import isometricStyles from './styles/isometric.css';
 import { getUser } from "./session.server";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: 'https://holywyvern.github.io/react-isometric-tilemap/css/index.css' }
+  ];
 };
 
 export const meta: MetaFunction = () => ({
