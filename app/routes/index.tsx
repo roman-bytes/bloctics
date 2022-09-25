@@ -1,122 +1,21 @@
-// @ts-ignore
-import IsometricMap, { IsometricTile, IsometricObject } from 'react-isometric-tilemap';
+// @ts-nocheck
+import IsometricTile from "~/components/IsometricTile";
+import IsometricObject from "~/components/IsometricObject";
+import IsometricMap from "~/components/IsometricMap";
 
 const mapWidth = 11;
 const mapHeight = 11;
 const heights = [
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1,
 ];
 
 export default function Index() {
+
+  console.log('render');
   return (
     <div className="flex justify-center">
       <IsometricMap
@@ -124,7 +23,6 @@ export default function Index() {
         mapHeight={mapHeight}
         tileSize={48}
         slabSize={12}
-        offsetY={100}
       >
         {heights.map((z, index) => {
           if (z === 0) {
@@ -138,7 +36,18 @@ export default function Index() {
               x={x}
               y={y}
               z={z}
-            />
+              style={{
+                "--background-floor": '#f3f3f3',
+                "--background-left-wall": 'red',
+                "--background-right-wall": 'blue'
+              }}
+              onEnter={(e) => {
+                e.target.style.backgroundColor = "pink";
+              }}
+              onLeave={(e) => {
+                e.target.style.backgroundColor = "#f3f3f3";
+              }}
+            />,
           ];
           if (Math.random() < 0.1) {
             result.push(
@@ -150,15 +59,18 @@ export default function Index() {
                 width={32}
                 height={32}
                 frames={["./4.png"]}
-                active
-                onEnter={() => {
-                  console.log('event');
+                active={true}
+                onEnter={(e) => {
+                  console.log('hoover', e.target);
+                  const tile = e.target.closest('.react-isometric-tile');
+
+                  console.log('tile', tile);
+                }}
+                onLeave={() => {
+                  console.log('leave');
                 }}
                 onClick={() => {
                   console.log('cclicked');
-                }}
-                onMouseAction={() => {
-                  console.log('action');
                 }}
               />
             );

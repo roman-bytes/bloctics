@@ -17,7 +17,8 @@ import { getUser } from "./session.server";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: 'https://holywyvern.github.io/react-isometric-tilemap/css/index.css' }
+    // { rel: "stylesheet", href: 'https://holywyvern.github.io/react-isometric-tilemap/css/index.css' },
+    { rel: "stylesheet", href: isometricStyles }
   ];
 };
 
