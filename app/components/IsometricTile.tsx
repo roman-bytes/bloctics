@@ -205,7 +205,7 @@ export default class IsometricTile extends Component {
       x,
       y
     } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "enter", "left-wall");
+    const event = new IsometricMapEvent(e.target, x, y, "enter", "left-wall");
     e.stopPropagation();
     if (typeof onMouseAction === "function") {
       onMouseAction(event);
@@ -230,7 +230,7 @@ export default class IsometricTile extends Component {
       x,
       y
     } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "leave", "left-wall");
+    const event = new IsometricMapEvent(e.target, x, y, "leave", "left-wall");
     e.stopPropagation();
     if (typeof onMouseAction === "function") {
       onMouseAction(event);
@@ -255,7 +255,7 @@ export default class IsometricTile extends Component {
       x,
       y
     } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "enter", "right-wall");
+    const event = new IsometricMapEvent(e.target, x, y, "enter", "right-wall");
     e.stopPropagation();
     if (typeof onMouseAction === "function") {
       onMouseAction(event);
@@ -280,7 +280,7 @@ export default class IsometricTile extends Component {
       x,
       y
     } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "leave", "right-wall");
+    const event = new IsometricMapEvent(e.target, x, y, "leave", "right-wall");
     e.stopPropagation();
     if (typeof onMouseAction === "function") {
       onMouseAction(event);

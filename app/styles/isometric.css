@@ -79,7 +79,7 @@
 }
 .react-isometric-tile > .floor {
   background: var(--background-floor);
-  border: 1px solid green;
+  border: 1px solid #384034;
   width: calc(var(--p-size-unit) * var(--p-tile-size));
   height: calc(var(--p-size-unit) * var(--p-tile-size));
   z-index: calc((var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
@@ -91,7 +91,7 @@
   position: absolute;
 }
 .react-isometric-tile > .wall.left {
-  border: 1px solid red;
+  border: 1px solid #384034;
   background: var(--background-left-wall);
   width: calc(var(--p-size-unit) * var(--p-tile-size));
   height: calc(
@@ -110,7 +110,7 @@
 }
 .react-isometric-tile > .wall.right {
   background: var(--background-right-wall);
-  border: 1px solid blue;
+  border: 1px solid #384034;
   height: calc(var(--p-size-unit) * var(--p-tile-size));
   width: calc(
     var(--p-size-unit) * var(--p-slab-size) * var(--p-right-z) * var(--p-ratio)
