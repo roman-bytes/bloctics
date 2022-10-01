@@ -127,14 +127,9 @@ export default class IsometricObject extends Component {
         <div
           className="react-isometric-object"
           onClick={this.onClick}
-          onMouseEnter={(e) => {
-            console.log('onMouseEnter from obj comp');
-            this.onMouseEnter(e);
-          }}
-          onEnter={() => {
-            console.log('onEnter from obj comp');
-            this.onMouseEnter();
-          }}
+          onMouseLeave={(e) => this.onMouseLeave(e)}
+          onMouseEnter={(e) => this.onMouseEnter(e)}
+          onEnter={this.onMouseEnter}
           onLeave={this.onMouseLeave}
         >
           {frames ? <AnimatedTexture frames={frames} delay={delay} /> : null}

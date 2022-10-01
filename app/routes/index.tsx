@@ -2,20 +2,136 @@
 import IsometricTile from "~/components/IsometricTile";
 import IsometricObject from "~/components/IsometricObject";
 import IsometricMap from "~/components/IsometricMap";
+import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
 
 const mapWidth = 11;
 const mapHeight = 11;
 const mapLayout = [
-  0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0
+  null,
+  null,
+  {},
+  {},
+  {},
+  { starter: true, class: "priest" },
+  {},
+  {},
+  {},
+  null,
+  null,
+  null,
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  null,
+  {},
+  {},
+  {},
+  {},
+  { starter: true, class: "knight" },
+  { starter: true, class: "knight" },
+  { starter: true, class: "knight" },
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  { starter: true, class: "fire-mage" },
+  { starter: true, class: "assassian" },
+  {},
+  {},
+  {},
+  { starter: true, class: "mage" },
+  { starter: true, class: "ranger" },
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  null,
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  null,
+  null,
+  null,
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  null,
+  null,
 ];
 
 export default function Index() {
-
-  console.log('render');
+  console.log("render");
   return (
     <div className="flex justify-center">
       <IsometricMap
@@ -25,7 +141,7 @@ export default function Index() {
         slabSize={12}
       >
         {mapLayout.map((z, index) => {
-          if (z === 0) {
+          if (z === null) {
             return null;
           }
           const x = index % mapWidth;
@@ -35,51 +151,51 @@ export default function Index() {
               key={`tile${index}`}
               x={x}
               y={y}
-              z={z}
+              z={1}
               style={{
-                "--background-floor": '#52754C',
-                "--background-left-wall": '#815E4A',
-                "--background-right-wall": '#815E4A'
+                "--background-floor": "#52754C",
+                "--background-left-wall": "#815E4A",
+                "--background-right-wall": "#815E4A",
               }}
               onEnter={(e) => {
                 e.target.style.backgroundColor = "pink";
               }}
               onLeave={(e) => {
-                console.log('e', e);
                 const area = e.area;
                 switch (area) {
-                  case 'floor':
+                  case "floor":
                     e.target.style.backgroundColor = "#52754C";
                     break;
-                  case 'right-wall':
-                    e.target.style.backgroundColor = '#815E4A';
+                  case "right-wall":
+                    e.target.style.backgroundColor = "#815E4A";
                     break;
-                  case 'left-wall':
-                    e.target.style.backgroundColor = '#815E4A';
+                  case "left-wall":
+                    e.target.style.backgroundColor = "#815E4A";
                     break;
                 }
               }}
             />,
           ];
-          if (Math.random() < 0.1) {
+
+          if (z.starter) {
             result.push(
               <IsometricObject
                 key={`object${index}`}
                 x={x}
                 y={y}
-                z={z}
+                z={1}
                 width={64}
                 height={64}
-                frames={["./4.png"]}
+                frames={[getClassAsset(z.class)]}
                 active={true}
                 onEnter={(e) => {
-
+                  highlightTile(e.target);
                 }}
-                onLeave={() => {
-                  console.log('leave');
+                onLeave={(e) => {
+                  unHighlightTile(e.target);
                 }}
                 onClick={() => {
-                  console.log('cclicked');
+                  console.log("cclicked");
                 }}
               />
             );
