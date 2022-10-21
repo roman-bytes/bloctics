@@ -3,5 +3,5 @@ export function highlightTile(el: HTMLElement) {
   const tile: Element = <Element>parent?.previousSibling;
   const floor = tile?.querySelector('.floor');
   // @ts-ignore
-  floor.style?.backgroundColor = 'blue';
+  floor.style.backgroundColor = 'blue';
 }
