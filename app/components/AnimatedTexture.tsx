@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 /**
  * An animated texture is an image than changes frames on a regular interval
@@ -11,22 +11,22 @@ import PropTypes from "prop-types";
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 export default class AnimatedTexture extends Component {
-  static propTypes = {
-    /** Array of images the animated texture uses */
-    frames: PropTypes.arrayOf(PropTypes.string).isRequired,
-    /** The interval on wich each frame is changed, in milliseconds */
-    delay: PropTypes.number.isRequired,
-    /** A set of extra classes added into the component */
-    className: PropTypes.string,
-    /** CSS style, same as any component */
-    style: PropTypes.object,
-    /** Callback for action when clicked */
-    onClick: PropTypes.func
-  };
+  // static propTypes = {
+  //   /** Array of images the animated texture uses */
+  //   frames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  //   /** The interval on wich each frame is changed, in milliseconds */
+  //   delay: PropTypes.number.isRequired,
+  //   /** A set of extra classes added into the component */
+  //   className: PropTypes.string,
+  //   /** CSS style, same as any component */
+  //   style: PropTypes.object,
+  //   /** Callback for action when clicked */
+  //   onClick: PropTypes.func
+  // };
 
-  static contextTypes = {
-    ticker: PropTypes.object
-  };
+  // static contextTypes = {
+  //   ticker: PropTypes.object
+  // };
 
   constructor(props, context = null) {
     super(props, context);

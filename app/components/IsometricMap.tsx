@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import MiniSignal from "mini-signals";
 import raf from "raf";
@@ -17,46 +17,46 @@ import IsometricMapEvent from "../events/IsometricMapEvent";
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 class IsometricMap extends Component {
-  static propTypes = {
-    /** The width of the map, in tiles */
-    mapWidth: PropTypes.number.isRequired,
-    /** The height of the map, in tiles */
-    mapHeight: PropTypes.number.isRequired,
-    /**
-     * The size of the tile. It represents the width of the horizontal diagonal
-     * and double the size of the vertical diagonal */
-    tileSize: PropTypes.number.isRequired,
-    /** The size of a tile lifting per it's z height */
-    slabSize: PropTypes.number.isRequired,
-    /** A CSS unit for dimensions, usually 1px */
-    sizeUnit: PropTypes.string,
-    /**
-     * The margin of the tile, this margins are extra space drawed by the tiles than you
-     * can use to apply some details into the tile, and make maps look less squared
-     */
-    margin: PropTypes.shape({
-      /** The top margin, used by the floor */
-      top: PropTypes.number.isRequired,
-      /** The bottom margin, used by the floor and the bottom part of the wall  */
-      bottom: PropTypes.number.isRequired,
-      /** The left margin, used by everything */
-      left: PropTypes.number.isRequired,
-      /** The right margin, used by everything */
-      right: PropTypes.number.isRequired
-    }),
-    /** An offset to move the map down, usefull to show the height properly */
-    offsetY: PropTypes.number,
-    /** Callback for users interacting with the map */
-    onMouseAction: PropTypes.func,
-    /** Callback called when you press the mouse down */
-    onMouseDown: PropTypes.func,
-    /** Callback called when you press the mouse up */
-    onMouseUp: PropTypes.func,
-    /** Callback called when the mouse enters the map */
-    onMouseEnter: PropTypes.func,
-    /** Callback called when the mouse exists the map */
-    onMouseLeave: PropTypes.func
-  };
+  // static propTypes = {
+  //   /** The width of the map, in tiles */
+  //   mapWidth: PropTypes.number.isRequired,
+  //   /** The height of the map, in tiles */
+  //   mapHeight: PropTypes.number.isRequired,
+  //   /**
+  //    * The size of the tile. It represents the width of the horizontal diagonal
+  //    * and double the size of the vertical diagonal */
+  //   tileSize: PropTypes.number.isRequired,
+  //   /** The size of a tile lifting per it's z height */
+  //   slabSize: PropTypes.number.isRequired,
+  //   /** A CSS unit for dimensions, usually 1px */
+  //   sizeUnit: PropTypes.string,
+  //   /**
+  //    * The margin of the tile, this margins are extra space drawed by the tiles than you
+  //    * can use to apply some details into the tile, and make maps look less squared
+  //    */
+  //   margin: PropTypes.shape({
+  //     /** The top margin, used by the floor */
+  //     top: PropTypes.number.isRequired,
+  //     /** The bottom margin, used by the floor and the bottom part of the wall  */
+  //     bottom: PropTypes.number.isRequired,
+  //     /** The left margin, used by everything */
+  //     left: PropTypes.number.isRequired,
+  //     /** The right margin, used by everything */
+  //     right: PropTypes.number.isRequired
+  //   }),
+  //   /** An offset to move the map down, usefull to show the height properly */
+  //   offsetY: PropTypes.number,
+  //   /** Callback for users interacting with the map */
+  //   onMouseAction: PropTypes.func,
+  //   /** Callback called when you press the mouse down */
+  //   onMouseDown: PropTypes.func,
+  //   /** Callback called when you press the mouse up */
+  //   onMouseUp: PropTypes.func,
+  //   /** Callback called when the mouse enters the map */
+  //   onMouseEnter: PropTypes.func,
+  //   /** Callback called when the mouse exists the map */
+  //   onMouseLeave: PropTypes.func
+  // };
 
   static defaultProps = {
     sizeUnit: "1px",
@@ -69,12 +69,12 @@ class IsometricMap extends Component {
     }
   };
 
-  static childContextTypes = {
-    /** The ticker is an object than can handle events on frame update.
-     * It calls when a new frame is triggered with request animation frame
-     */
-    ticker: PropTypes.object
-  };
+  // static childContextTypes = {
+  //   /** The ticker is an object than can handle events on frame update.
+  //    * It calls when a new frame is triggered with request animation frame
+  //    */
+  //   ticker: PropTypes.object
+  // };
 
   constructor(props) {
     super(props);
