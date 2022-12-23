@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from '@remix-run/react';
 
+// export const loader = async ({ request }) => {
+//
+// };
+
 function Index() {
   return (
     <main className="flex w-full h-full justify-center items-center flex-col">

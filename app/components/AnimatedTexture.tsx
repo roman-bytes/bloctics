@@ -1,6 +1,19 @@
 // @ts-nocheck
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
+
+interface AnimatedTextureProps {
+  /** Array of images the animated texture uses */
+  frames: string[];
+  /** The interval on which each frame is changed, in milliseconds */
+  delay: number;
+  /** A set of extra classes added into the component */
+  className?: string;
+  /** CSS style, same as any component */
+  style?: object;
+  /** Callback for action when clicked */
+  onClick?(...args: unknown[]): unknown;
+}
 
 /**
  * An animated texture is an image than changes frames on a regular interval
@@ -10,25 +23,12 @@ import React, { Component } from "react";
  * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
-export default class AnimatedTexture extends Component {
-  // static propTypes = {
-  //   /** Array of images the animated texture uses */
-  //   frames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  //   /** The interval on wich each frame is changed, in milliseconds */
-  //   delay: PropTypes.number.isRequired,
-  //   /** A set of extra classes added into the component */
-  //   className: PropTypes.string,
-  //   /** CSS style, same as any component */
-  //   style: PropTypes.object,
-  //   /** Callback for action when clicked */
-  //   onClick: PropTypes.func
-  // };
+export default class AnimatedTexture extends Component<AnimatedTextureProps> {
+  static contextTypes = {
+    ticker: PropTypes.object
+  };
 
-  // static contextTypes = {
-  //   ticker: PropTypes.object
-  // };
-
-  constructor(props, context = null) {
+  constructor(props: AnimatedTextureProps, context = null) {
     super(props, context);
     const { delay } = this.props;
     this.state = {
@@ -37,7 +37,7 @@ export default class AnimatedTexture extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: { delay: any; frames: any; }) {
     if (nextProps.delay === this.props.delay) {
       return;
     }
@@ -84,7 +84,7 @@ export default class AnimatedTexture extends Component {
     }
   }
 
-  onFrameUpdate = delta => {
+  onFrameUpdate = (delta: number) => {
     const { delay, frames } = this.props;
     let { currentFrame, currentDelay } = this.state;
     currentDelay -= delta;
@@ -115,4 +115,4 @@ export default class AnimatedTexture extends Component {
       />
     );
   }
-};
+}

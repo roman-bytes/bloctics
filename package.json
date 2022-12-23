@@ -41,12 +41,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-utils": "^3.3.0",
-    "tiny-invariant": "^1.2.0"
+    "tiny-invariant": "^1.2.0",
+    "xstate": "^4.34.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",
-    "@remix-run/dev": "^1.6.5",
-    "@remix-run/eslint-config": "^1.6.5",
+    "@remix-run/dev": "*",
+    "@remix-run/eslint-config": "*",
     "@testing-library/cypress": "^8.0.3",
     "@testing-library/dom": "^8.16.0",
     "@testing-library/jest-dom": "^5.16.4",

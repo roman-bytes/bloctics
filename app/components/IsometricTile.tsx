@@ -1,12 +1,84 @@
 // @ts-nocheck
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
 
 import AnimatedTexture from "~/components/AnimatedTexture";
 
 import IsometricMapEvent from "../events/IsometricMapEvent";
-
 // import "./IsometricTile.scss";
+
+interface IsometricTileProps {
+  /** The x position of the tile, from 0 to width - 1 */
+  x: number;
+  /** The y position of the tile, from 0 to height - 1 */
+  y: number;
+  /** The height of the tile, it will be "lifted" as map slab size * z */
+  z?: number;
+  /** The height of the left wall, by default it is the same as the z value */
+  leftZ?: unknown | unknown;
+  /* The height of the right wall, by default it is the same as the z value */
+  rightZ?: unknown | unknown;
+  /** A list of frames for each part of the tile */
+  frames?: {
+    /** The floor texture name */
+    floor: string,
+    /** The left wall textures */
+    leftWall: {
+      /** The top part of the wall */
+      top: string,
+      /** The middle part of the texture (repeats vertically) */
+      middle: string,
+      /** The bottom part of the texture */
+      bottom: string
+    },
+    /** The right wall textures */
+    rightWall: {
+      /** The top part of the wall */
+      top: string,
+      /** The middle part of the texture (repeats vertically) */
+      middle: string,
+      /** The bottom part of the texture */
+      bottom: string
+    }
+  }[];
+  /** An intervall in milliseconds on wich each frame changes */
+  delay?: number;
+  /** Extra css classes added into the object */
+  className?: string;
+  /** An style object of CSS propertyes */
+  style?: object;
+  /** Event used to catch all mouse events */
+  onMouseAction?(...args: unknown[]): unknown;
+  /** Click event for the entire tile */
+  onClick?(...args: unknown[]): unknown;
+  /** Click event for only the floor */
+  onFloorClick?(...args: unknown[]): unknown;
+  /** Click event for any wall */
+  onWallClick?(...args: unknown[]): unknown;
+  /** Click event for left wall */
+  onLeftWallClick?(...args: unknown[]): unknown;
+  /** Click event for right wall */
+  onRigthWallClick?(...args: unknown[]): unknown;
+  /** Callback called when the mouse enters any part of the tile */
+  onEnter?(...args: unknown[]): unknown;
+  /** Callback called when the mouse enters the floor of the tile */
+  onFloorEnter?(...args: unknown[]): unknown;
+  /** Callback called when the mouse enters any wall of the tile */
+  onWallEnter?(...args: unknown[]): unknown;
+  /** Callback called when the mouse enters the left wall of the tile */
+  onLeftWallEnter?(...args: unknown[]): unknown;
+  /** Callback called when the mouse enters the right of the tile */
+  onRigthWallEnter?(...args: unknown[]): unknown;
+  /** Callback called when the mouse exits any part of the tile */
+  onLeave?(...args: unknown[]): unknown;
+  /** Callback called when the mouse exits the floor of the tile */
+  onFloorLeave?(...args: unknown[]): unknown;
+  /** Callback called when the mouse exits any wall of the tile */
+  onWallLeave?(...args: unknown[]): unknown;
+  /** Callback called when the mouse exits the left wall of the tile */
+  onLeftWallLeave?(...args: unknown[]): unknown;
+  /** Callback called when the mouse exits the right of the tile */
+  onRigthWallLeave?(...args: unknown[]): unknown;
+}
 
 /**
  * A tile is a square on the map. It is composed of a floor and optionally
@@ -17,83 +89,7 @@ import IsometricMapEvent from "../events/IsometricMapEvent";
  * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
-export default class IsometricTile extends Component {
-  // static propTypes = {
-  //   /** The x position of the tile, from 0 to width - 1 */
-  //   x: PropTypes.number.isRequired,
-  //   /** The y position of the tile, from 0 to height - 1 */
-  //   y: PropTypes.number.isRequired,
-  //   /** The height of the tile, it will be "lifted" as map slab size * z */
-  //   z: PropTypes.number,
-  //   /** The height of the left wall, by default it is the same as the z value */
-  //   leftZ: PropTypes.oneOf([PropTypes.number, null]),
-  //   /* The height of the right wall, by default it is the same as the z value */
-  //   rightZ: PropTypes.oneOf([PropTypes.number, null]),
-  //   /** A list of frames for each part of the tile */
-  //   frames: PropTypes.arrayOf(
-  //     PropTypes.shape({
-  //       /** The floor texture name */
-  //       floor: PropTypes.string.isRequired,
-  //       /** The left wall textures */
-  //       leftWall: PropTypes.shape({
-  //         /** The top part of the wall */
-  //         top: PropTypes.string.isRequired,
-  //         /** The middle part of the texture (repeats vertically) */
-  //         middle: PropTypes.string.isRequired,
-  //         /** The bottom part of the texture */
-  //         bottom: PropTypes.string.isRequired
-  //       }).isRequired,
-  //       /** The right wall textures */
-  //       rightWall: PropTypes.shape({
-  //         /** The top part of the wall */
-  //         top: PropTypes.string.isRequired,
-  //         /** The middle part of the texture (repeats vertically) */
-  //         middle: PropTypes.string.isRequired,
-  //         /** The bottom part of the texture */
-  //         bottom: PropTypes.string.isRequired
-  //       }).isRequired
-  //     })
-  //   ),
-  //   /** An intervall in milliseconds on wich each frame changes */
-  //   delay: PropTypes.number,
-  //   /** Extra css classes added into the object */
-  //   className: PropTypes.string,
-  //   /** An style object of CSS propertyes */
-  //   style: PropTypes.object,
-  //   /** Event used to catch all mouse events */
-  //   onMouseAction: PropTypes.func,
-  //   /** Click event for the entire tile */
-  //   onClick: PropTypes.func,
-  //   /** Click event for only the floor */
-  //   onFloorClick: PropTypes.func,
-  //   /** Click event for any wall */
-  //   onWallClick: PropTypes.func,
-  //   /** Click event for left wall */
-  //   onLeftWallClick: PropTypes.func,
-  //   /** Click event for right wall */
-  //   onRigthWallClick: PropTypes.func,
-  //   /** Callback called when the mouse enters any part of the tile */
-  //   onEnter: PropTypes.func,
-  //   /** Callback called when the mouse enters the floor of the tile */
-  //   onFloorEnter: PropTypes.func,
-  //   /** Callback called when the mouse enters any wall of the tile */
-  //   onWallEnter: PropTypes.func,
-  //   /** Callback called when the mouse enters the left wall of the tile */
-  //   onLeftWallEnter: PropTypes.func,
-  //   /** Callback called when the mouse enters the right of the tile */
-  //   onRigthWallEnter: PropTypes.func,
-  //   /** Callback called when the mouse exits any part of the tile */
-  //   onLeave: PropTypes.func,
-  //   /** Callback called when the mouse exits the floor of the tile */
-  //   onFloorLeave: PropTypes.func,
-  //   /** Callback called when the mouse exits any wall of the tile */
-  //   onWallLeave: PropTypes.func,
-  //   /** Callback called when the mouse exits the left wall of the tile */
-  //   onLeftWallLeave: PropTypes.func,
-  //   /** Callback called when the mouse exits the right of the tile */
-  //   onRigthWallLeave: PropTypes.func
-  // };
-
+export default class IsometricTile extends Component<IsometricTileProps> {
   static defaultProps = {
     z: 0,
     leftZ: null,
@@ -404,4 +400,4 @@ export default class IsometricTile extends Component {
       </div>
     );
   }
-};
+}
