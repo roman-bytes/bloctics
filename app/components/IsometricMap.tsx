@@ -1,7 +1,5 @@
 // @ts-nocheck
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-
 import MiniSignal from "mini-signals";
 import raf from "raf";
 

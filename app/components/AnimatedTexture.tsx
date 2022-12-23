@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 interface AnimatedTextureProps {
   /** Array of images the animated texture uses */
