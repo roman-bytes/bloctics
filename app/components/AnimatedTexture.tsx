@@ -24,7 +24,7 @@ interface AnimatedTextureProps {
  */
 export default class AnimatedTexture extends Component<AnimatedTextureProps> {
   static contextTypes = {
-    ticker: object
+    ticker: {}
   };
 
   constructor(props: AnimatedTextureProps, context = null) {

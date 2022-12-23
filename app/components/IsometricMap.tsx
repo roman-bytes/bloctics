@@ -71,7 +71,7 @@ class IsometricMap extends Component<IsometricMapProps> {
     /** The ticker is an object than can handle events on frame update.
      * It calls when a new frame is triggered with request animation frame
      */
-    ticker: object
+    ticker: { }
   };
 
   constructor(props) {
