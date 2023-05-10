@@ -16,18 +16,19 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  changes:
+  state-machine-check:
     runs-on: ubuntu-latest
     steps:
-      - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
-      - name: test
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Check for state machine
         run: |
-          cat $HOME/files.json
-          cat $HOME/files_modified.json
-          cat $HOME/files_added.json
-          cat $HOME/files_removed.json
-          echo '${{ steps.file_changes.outputs.files}}'
-          echo '${{ steps.file_changes.outputs.files_modified}}'
-          echo '${{ steps.file_changes.outputs.files_added}}'
-          echo '${{ steps.file_changes.outputs.files_removed}}'
+          # Find all JavaScript and TypeScript files in the pull request
+          code_files=$(git diff --name-only HEAD~1 | grep -E '\.(js|ts)$')
+          # Check for the presence of a state machine in each file
+          for file in $code_files; do
+            if grep -q "createMachine" "$file"; then
+              echo "State machine found in $file"
+              exit 1
+            fi
+          done
