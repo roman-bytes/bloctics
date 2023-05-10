@@ -1,6 +1,7 @@
 import React from "react";
 import { Form } from "@remix-run/react";
 
+// @ts-ignore
 function GameSetup({ showCreate, showJoin, context }) {
   // @ts-ignore
   return (

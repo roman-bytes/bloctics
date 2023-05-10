@@ -9,7 +9,7 @@ import { blocticsMachineCookie } from "~/cookies";
 import { asyncInterpret } from "~/asynInterpret";
 import { getUser } from "~/session.server";
 
-export const readCookie = async (request) => {
+export const readCookie = async (request: Request) => {
   const oldCookie = request.headers.get("Cookie");
   return await blocticsMachineCookie.parse(oldCookie);
 };
@@ -26,6 +26,7 @@ export async function loader({ request }: LoaderArgs) {
   });
 }
 
+// @ts-ignore
 export const action = async ({ request, params: { state } }) => {
   const stateConfig = await readCookie(request);
   if (!stateConfig) return redirect(".."); // No cookie, so start over
