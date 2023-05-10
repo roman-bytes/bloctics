@@ -12,7 +12,7 @@ jobs:
       - name: Check for state machine
         run: |
           # Find all JavaScript and TypeScript files in the pull request
-          code_files=$(git diff --name-only HEAD~1 | grep -E '\.(js|ts)$')
+          code_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep -E '\.(js|ts)$')
           # Check for the presence of a state machine in each file
           for file in $code_files; do
             if grep -q "createMachine" "$file"; then
