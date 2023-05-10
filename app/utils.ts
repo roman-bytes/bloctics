@@ -41,6 +41,7 @@ export function useMatchesData(
     () => matchingRoutes.find((route) => route.id === id),
     [matchingRoutes, id]
   );
+  console.log('route.data', route?.data);
   return route?.data;
 }
 
@@ -54,6 +55,14 @@ export function useOptionalUser(): User | undefined {
     return undefined;
   }
   return data.user;
+}
+
+export function useMachineState(): any {
+  const data = useMatchesData('root');
+  if (!data) {
+    return undefined;
+  }
+  return data.state;
 }
 
 export function useUser(): User {

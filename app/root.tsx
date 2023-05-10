@@ -36,7 +36,7 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full bg-black">
+    <html lang="en" className="h-full bg-gradient-to-b from-blue-700 via-blue-800 to-gray-900">
       <head>
         <Meta />
         <Links />

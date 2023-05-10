@@ -134,6 +134,7 @@ const mapLayout = [
 
 function Bloctics(props) {
   const hover = new Audio(hoverSound);
+  hover.volume = 0.1;
   return (
     <div className="flex justify-center">
       <IsometricMap
