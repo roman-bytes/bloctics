@@ -1,6 +1,6 @@
 name: State Machine Screenshot Trigger
 on:
-  issue_comment:
+  pull_request_comment:
     types: [created]
 jobs:
   run-on-comment:
