@@ -1,6 +1,13 @@
 name: State Machine Check
 on:
-  pull_request: { }
+  push:
+    branches:
+      - main
+      - dev
+    pull_request: { }
+  permissions:
+    actions: write
+    contents: read
 jobs:
   state-machine-check:
     runs-on: ubuntu-latest
