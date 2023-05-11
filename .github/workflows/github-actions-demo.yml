@@ -1,16 +1,17 @@
-name: State Machine Screenshot Trigger
+name: "Deploy on Comment"
+
 on:
-  pull_request_review:
+  issue_comment:
     types: [created]
+
 jobs:
-  run-on-comment:
+  deploy:
     runs-on: ubuntu-latest
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Check for trigger phrase
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy
         run: |
-          if [[ "${{ github.event.issue.pull_request.url }}" != "" && "${{ github.event.comment.body }}" == *"Create state machine screenshot"* ]]; then
-            echo "Creating state machine screenshot!"
-            # add your code here to create the screenshot
-          fi
+          echo "Deploying..."
