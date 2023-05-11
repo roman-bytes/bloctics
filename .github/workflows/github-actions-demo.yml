@@ -1,5 +1,6 @@
 name: State Machine Check
-on: [push]
+on:
+  pull_request: { }
 jobs:
   state-machine-check:
     runs-on: ubuntu-latest
