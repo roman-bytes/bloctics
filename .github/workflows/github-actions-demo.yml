@@ -1,32 +1,16 @@
-name: State Machine Check
+name: State Machine Screenshot Trigger
 on:
-  push:
-    branches:
-      - main
-      - dev
-    pull_request: { }
-
+  issue_comment:
+    types: [created]
 jobs:
-  state-machine-check:
+  run-on-comment:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          node-version: 16
-      - name: Check for state machine
+      - name: Check for trigger phrase
         run: |
-          ${{ github.base_ref }}
-          ${{ github.head_ref }}
-
-
-#        run: |
-#          # Find all JavaScript and TypeScript files in the pull request
-#          code_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.base_ref }} ${{ github.head_ref }} | grep -E '\.(js|ts)$')
-#          # Check for the presence of a state machine in each file
-#          for file in $code_files; do
-#            if grep -q "createMachine" "$file"; then
-#              echo "State machine found in $file"
-#              exit 1
-#            fi
-#          done
+          if [[ "${{ github.event.issue.pull_request.url }}" != "" && "${{ github.event.comment.body }}" == *"Create state machine screenshot"* ]]; then
+            echo "Creating state machine screenshot!"
+            # add your code here to create the screenshot
+          fi
