@@ -4,6 +4,12 @@ import React, { Component } from "react";
 import AnimatedTexture from "~/components/AnimatedTexture";
 
 import IsometricMapEvent from "../events/IsometricMapEvent";
+
+// todo: hover sound needs to go here
+// import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
+// import hoverSound from "../../public/sounds/hover_sound_2.wav";
+
+
 // import "./IsometricTile.scss";
 
 interface IsometricTileProps {

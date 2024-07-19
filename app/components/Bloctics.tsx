@@ -2,9 +2,14 @@
 import React from "react";
 import IsometricMap from "~/components/IsometricMap";
 import IsometricTile from "~/components/IsometricTile";
-import IsometricObject from "~/components/IsometricObject";
-import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
-import hoverSound from "../../public/sounds/hover_sound_2.wav";
+
+// Units
+import Knight from "~/components/units/Knight";
+import FireMage from "~/components/units/FireMage";
+import Assassin from "~/components/units/Assassin";
+import Priest from "~/components/units/Priest";
+import Ranger from "~/components/units/Ranger";
+
 
 const mapWidth = 11;
 const mapHeight = 11;
@@ -45,7 +50,7 @@ const mapLayout = [
   {},
   {},
   { starter: true, class: "fire-mage" },
-  { starter: true, class: "assassian" },
+  { starter: true, class: "assassin" },
   {},
   {},
   {},
@@ -133,8 +138,8 @@ const mapLayout = [
 ];
 
 function Bloctics(props) {
-  const hover = new Audio(hoverSound);
-  hover.volume = 0.1;
+//  const hover = new Audio(hoverSound);
+//  hover.volume = 0.1;
   return (
     <div className="flex justify-center">
       <IsometricMap
@@ -161,11 +166,9 @@ function Bloctics(props) {
                 "--background-right-wall": "#815E4A",
               }}
               onEnter={(e) => {
-                hover.play();
                 e.target.style.backgroundColor = "#82A67C";
               }}
               onLeave={(e) => {
-                hover.pause();
                 const area = e.area;
                 switch (area) {
                   case "floor":
@@ -183,29 +186,57 @@ function Bloctics(props) {
           ];
 
           if (z.starter) {
-            result.push(
-              <IsometricObject
-                key={`object${index}`}
-                x={x}
-                y={y}
-                z={1}
-                width={64}
-                height={64}
-                frames={[getClassAsset(z.class)]}
-                active={true}
-                onEnter={(e) => {
-                  hover.play();
-                  highlightTile(e.target);
-                }}
-                onLeave={(e) => {
-                  hover.pause();
-                  unHighlightTile(e.target);
-                }}
-                onClick={() => {
-                  console.log("cclicked");
-                }}
-              />
-            );
+            switch (z.class) {
+              case('knight'): {
+                result.push(
+                  <Knight
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
+                );
+              }
+              break;
+
+              case('fire-mage'): {
+                result.push(
+                  <FireMage
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
+                )
+              }
+              break;
+
+              case('assassin'): {
+                result.push(
+                  <Assassin
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
+                )
+              }
+              break;
+
+              case('priest'): {
+                result.push(
+                  <Priest x={x} y={y} z={1} unit={z.class} />
+                )
+              }
+              break;
+
+              case('ranger'): {
+                result.push(
+                  <Ranger x={x} y={y} z={1} unit={z.class} />
+                )
+              }
+              break;
+            }
           }
           return result;
         })}

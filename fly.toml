@@ -2,6 +2,7 @@ app = "bloctics-f495"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
+regions = ["iad"]
 
 [experimental]
 allowed_public_ports = [ ]
@@ -48,3 +49,12 @@ script_checks = [ ]
   timeout = "2s"
   tls_skip_verify = false
   headers = { }
+
+[env]
+DATABASE_URL="file:./data.db?connection_limit=1"
+SESSION_SECRET="super-duper-s3cret"
+
+[machine]
+cpu = 2 # Specify the number of CPUs
+memory_mb = 4096 # Specify the memory in MBvm_size
+vm_size = "dedicated-cpu-2x" # Change this value to your desired machine size

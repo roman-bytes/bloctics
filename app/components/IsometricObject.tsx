@@ -5,6 +5,11 @@ import AnimatedTexture from "./AnimatedTexture";
 
 import IsometricMapEvent from "../events/IsometricMapEvent";
 
+// todo: Hover sounds and other things should be here.
+// import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
+// import hoverSound from "../../public/sounds/hover_sound_2.wav";
+
+
 // import "./IsometricObject.scss";
 
 interface IsometricObjectProps {
@@ -41,7 +46,7 @@ interface IsometricObjectProps {
 /**
  * An isometric object is everything than is not  a tile or a character.
  * They can be animated and over any tile.
- * They are used for decorations than don't look like a floor pice, like trees, rocks
+ * They are used for decorations than don't look like a floor piece, like trees, rocks
  * or buildings.
  *
  * @version 1.0.0
