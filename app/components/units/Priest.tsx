@@ -14,6 +14,7 @@ function Priest({ x, y, z, unit }: PriestProps) {
     attack: 1,
     damage: 10, // todo: random generator
     position: "N", // todo: add in constants
+    location: { x, y },
   };
 
   return (
@@ -33,6 +34,7 @@ function Priest({ x, y, z, unit }: PriestProps) {
       }}
       onClick={() => {
         console.log('CLICKED22', unitStats)
+
       }}
     />
   )

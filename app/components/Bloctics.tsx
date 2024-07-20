@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import IsometricMap from "~/components/IsometricMap";
 import IsometricTile from "~/components/IsometricTile";
 
@@ -9,7 +9,7 @@ import FireMage from "~/components/units/FireMage";
 import Assassin from "~/components/units/Assassin";
 import Priest from "~/components/units/Priest";
 import Ranger from "~/components/units/Ranger";
-
+import Mage from "~/components/units/Mage";
 
 const mapWidth = 11;
 const mapHeight = 11;
@@ -138,8 +138,6 @@ const mapLayout = [
 ];
 
 function Bloctics(props) {
-//  const hover = new Audio(hoverSound);
-//  hover.volume = 0.1;
   return (
     <div className="flex justify-center">
       <IsometricMap
@@ -166,6 +164,7 @@ function Bloctics(props) {
                 "--background-right-wall": "#815E4A",
               }}
               onEnter={(e) => {
+                if(e.area === 'right-wall' || e.area === 'left-wall') return;
                 e.target.style.backgroundColor = "#82A67C";
               }}
               onLeave={(e) => {
@@ -190,6 +189,7 @@ function Bloctics(props) {
               case('knight'): {
                 result.push(
                   <Knight
+                    key={z.class + x + y}
                     x={x}
                     y={y}
                     z={1}
@@ -202,6 +202,7 @@ function Bloctics(props) {
               case('fire-mage'): {
                 result.push(
                   <FireMage
+                    key={z.class + x + y}
                     x={x}
                     y={y}
                     z={1}
@@ -214,6 +215,7 @@ function Bloctics(props) {
               case('assassin'): {
                 result.push(
                   <Assassin
+                    key={z.class + x + y}
                     x={x}
                     y={y}
                     z={1}
@@ -225,19 +227,44 @@ function Bloctics(props) {
 
               case('priest'): {
                 result.push(
-                  <Priest x={x} y={y} z={1} unit={z.class} />
+                  <Priest
+                    key={z.class + x + y}
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
                 )
               }
               break;
 
               case('ranger'): {
                 result.push(
-                  <Ranger x={x} y={y} z={1} unit={z.class} />
+                  <Ranger
+                    key={z.class + x + y}
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
                 )
               }
               break;
+
+              case('mage'): {
+                result.push(
+                  <Mage
+                    key={z.class + x + y}
+                    x={x}
+                    y={y}
+                    z={1}
+                    unit={z.class}
+                  />
+                )
+              }
             }
           }
+
           return result;
         })}
       </IsometricMap>

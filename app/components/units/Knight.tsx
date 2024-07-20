@@ -14,6 +14,7 @@ function Knight({ x, y, z, unit }: KnightProps) {
     attack: 1,
     damage: 10, // todo: random generator
     position: "N", // todo: add in constants
+    location: { x, y },
   };
 
   return (
@@ -23,6 +24,7 @@ function Knight({ x, y, z, unit }: KnightProps) {
         y={y}
         z={z}
         height={64}
+        unit={unit}
         frames={[getClassAsset(unit)]}
         active={true}
         onEnter={() => {
@@ -31,8 +33,10 @@ function Knight({ x, y, z, unit }: KnightProps) {
         onLeave={() => {
           console.log('LEAVE')
         }}
-        onClick={() => {
+        onClick={(e) => {
+          console.log('E-TARGET', e)
           console.log('CLICKED22', unitStats)
+
         }}
       />
   )

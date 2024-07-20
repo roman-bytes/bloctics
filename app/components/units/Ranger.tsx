@@ -14,6 +14,7 @@ function Ranger({ x, y, z, unit }: RangerProps) {
     attack: 1,
     damage: 10, // todo: random generator
     position: "N", // todo: add in constants
+    location: { x, y }
   };
 
   return (

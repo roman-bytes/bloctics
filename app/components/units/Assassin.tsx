@@ -14,6 +14,7 @@ function Assassin({ x, y, z, unit }: AssassinProps) {
     attack: 1,
     damage: 10, // todo: random generator
     position: "N", // todo: add in constants
+    location: { x, y }
   };
 
   return (

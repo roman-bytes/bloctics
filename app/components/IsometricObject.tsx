@@ -5,12 +5,17 @@ import AnimatedTexture from "./AnimatedTexture";
 
 import IsometricMapEvent from "../events/IsometricMapEvent";
 
-// todo: Hover sounds and other things should be here.
-// import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
-// import hoverSound from "../../public/sounds/hover_sound_2.wav";
+import hoverSound from "../../public/sounds/hover_sound_2.wav";
 
 
 // import "./IsometricObject.scss";
+
+function getTileBelowObject(el) {
+  let parent = el.parentElement;
+  let tile = parent.previousElementSibling;
+  return tile.querySelector('.floor');
+}
+
 
 interface IsometricObjectProps {
   /** The x position of the map (from 0 to map width - 1) */
@@ -33,6 +38,8 @@ interface IsometricObjectProps {
   frames?: string[];
   /** An interval between each frame */
   delay?: number;
+  /** Name of current unit */
+  unit: string;
   /** An even triggered when the user clicks on the object */
   onClick?(...args: unknown[]): unknown;
   /** An event triggered when the user moves the mouse over the object */
@@ -61,15 +68,25 @@ export default class IsometricObject extends Component<IsometricObjectProps> {
   };
 
   onClick = (e: { stopPropagation: () => void; }) => {
-    console.log('from object comp');
-    const { x, y, onClick, onMouseAction, active } = this.props;
+    const { unit, x, y, onClick, onMouseAction, active } = this.props;
     if (!active) return;
+    console.log('position', {x, y});
+    console.log('from object comp', e.target);
+
+    switch (unit) {
+      case('knight'): {
+
+      }
+      break;
+    }
+
     const event = new IsometricMapEvent(this, x, y, "click", "object");
     e.stopPropagation();
     if (typeof onMouseAction === "function") {
       onMouseAction(event);
     }
     if (typeof onClick === "function") {
+      console.log('TARGET IME', event);
       onClick(event);
     }
   };
@@ -85,6 +102,9 @@ export default class IsometricObject extends Component<IsometricObjectProps> {
     if (typeof onEnter === "function") {
       onEnter(event);
     }
+
+    let floor = getTileBelowObject(e.target);
+    floor.style.background = '#82A67C';
   };
 
   onMouseLeave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -98,6 +118,8 @@ export default class IsometricObject extends Component<IsometricObjectProps> {
     if (typeof onLeave === "function") {
       onLeave(event);
     }
+    let floor = getTileBelowObject(e.target);
+    floor.style.background = '#52754C';
   };
 
   render() {
@@ -111,7 +133,7 @@ export default class IsometricObject extends Component<IsometricObjectProps> {
       className,
       style,
       frames,
-      delay
+      delay,
     } = this.props;
     const vars = {
       ...(style || {}),
@@ -126,13 +148,19 @@ export default class IsometricObject extends Component<IsometricObjectProps> {
     if (active) {
       classes.push("active");
     }
+
+    const hover = new Audio(hoverSound);
+    hover.volume = 0.1;
     return (
       <div className={classes.join(" ")} style={vars}>
         <div
           className="react-isometric-object"
           onClick={this.onClick}
           onMouseLeave={(e) => this.onMouseLeave(e)}
-          onMouseEnter={(e) => this.onMouseEnter(e)}
+          onMouseEnter={(e) => {
+            this.onMouseEnter(e);
+            hover.play();
+          }}
           onEnter={this.onMouseEnter}
           onLeave={this.onMouseLeave}
         >

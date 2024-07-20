@@ -5,9 +5,7 @@ import AnimatedTexture from "~/components/AnimatedTexture";
 
 import IsometricMapEvent from "../events/IsometricMapEvent";
 
-// todo: hover sound needs to go here
-// import { getClassAsset, highlightTile, unHighlightTile } from "~/util";
-// import hoverSound from "../../public/sounds/hover_sound_2.wav";
+import hoverSound from "../../public/sounds/hover_sound_2.wav";
 
 
 // import "./IsometricTile.scss";
@@ -366,12 +364,20 @@ export default class IsometricTile extends Component<IsometricTileProps> {
     };
     const classes = ["react-isometric-tile"];
     if (className) classes.push(className);
+
+
+  const hover = new Audio(hoverSound);
+  hover.volume = 0.1;
+
     return (
       <div className={classes.join(" ")} style={vars}>
         <div
           className="floor"
           onClick={this.onFloorClick}
-          onMouseEnter={this.onFloorMouseEnter}
+          onMouseEnter={(e) => {
+            this.onFloorMouseEnter(e);
+            hover.play();
+          }}
           onMouseLeave={this.onFloorMouseLeave}
         />
         {lz > 0 ? (

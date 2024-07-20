@@ -13,7 +13,8 @@ function FireMage({ x, y, z, unit }: UnitProps) {
     movement: 0,
     attack: 0,
     damage: 0,
-    position: 'N'
+    position: 'N',
+    location: { x, y }
   }
 
   return (
